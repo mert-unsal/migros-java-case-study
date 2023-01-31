@@ -1,0 +1,10 @@
+/Users/mertunsal/Workspace/migros-java-case-study/src/main/java/com/migros/casestudy/configuration/kafka/TopicConfiguration.java
+/Users/mertunsal/Workspace/migros-java-case-study/src/main/java/com/migros/casestudy/configuration/kafka/ListenerConfiguration.java
+/Users/mertunsal/Workspace/migros-java-case-study/src/main/java/com/migros/casestudy/domain/model/ProducerConfigDto.java
+/Users/mertunsal/Workspace/migros-java-case-study/src/main/java/com/migros/casestudy/configuration/kafka/ProducerConfiguration.java
+/Users/mertunsal/Workspace/migros-java-case-study/src/main/java/com/migros/casestudy/domain/event/CourierEvent.java
+/Users/mertunsal/Workspace/migros-java-case-study/src/main/java/com/migros/casestudy/domain/model/ConsumerConfigDto.java
+/Users/mertunsal/Workspace/migros-java-case-study/src/main/java/com/migros/casestudy/configuration/kafka/PropertiesConfiguration.java
+/Users/mertunsal/Workspace/migros-java-case-study/src/main/java/com/migros/casestudy/configuration/kafka/KafkaListenerAutomation.java
+/Users/mertunsal/Workspace/migros-java-case-study/src/main/java/com/migros/casestudy/listener/KafkaMessageListener.java
+/Users/mertunsal/Workspace/migros-java-case-study/src/main/java/com/migros/casestudy/CaseStudyApplication.java
