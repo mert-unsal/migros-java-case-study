@@ -3,7 +3,7 @@ spring:
     name: MigrosCaseStudy
     description: Case Study for Migros Interview
   profiles:
-    include: postgresql
+    include: postgresql, kafka
 springdoc:
   api-docs:
     path: /api-docs
@@ -15,31 +15,3 @@ logging:
   level:
     org.hibernate: INFO
     org.liquibase: INFO
-
-kafka-config:
-  case-study-consumer:
-    topic: migros.case.study.courier.topic
-    retry-topic: migros.case.study.courier.topic.retry
-    error-topic: migros.case.study.courier.topic.error
-    data-class: com.migros.casestudy.domain.event.CourierEvent
-    partitions: 1
-    replicas: 3
-    props:
-      "[bootstrap.servers]": localhost:9092
-      "[group.id]": migros.case.study.courier.group
-      "[key.deserializer]": org.apache.kafka.common.serialization.StringDeserializer
-      "[value.deserializer]": org.springframework.kafka.support.serializer.JsonDeserializer
-      "[auto.offset.reset]": earliest
-  case-study-producer:
-    topic: migros.case.study.courier.topic
-    retry-topic: migros.case.study.courier.topic.retry
-    error-topic: migros.case.study.courier.topic.error
-    data-class: com.migros.casestudy.domain.event.CourierEvent
-    props:
-      "[bootstrap.servers]": localhost:9092
-      "[group.id]": migros.case.study.courier.group
-      "[key.serializer]": org.apache.kafka.common.serialization.StringDeserializer
-      "[value.serializer]": org.springframework.kafka.support.serializer.JsonSerializer
-      "[auto.offset.reset]": earliest
-      "[acks]": all
-      "[linger.ms]": all
