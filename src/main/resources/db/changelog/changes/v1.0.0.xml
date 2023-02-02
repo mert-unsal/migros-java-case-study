@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet author="mert.unsal" id="2023-01-27 22:54">
+        <sql>
+            create table if not exists courier
+            (
+                id                 bigint               not null primary key,
+                created_date       timestamp            not null,
+                last_modified_date timestamp            not null,
+                event_time         bigserial            not null,
+                latitude           double precision     not null,
+                longitude          double precision     not null,
+                name               varchar(255)
+            );
+            create sequence if not exists courier_seq;
+            alter table courier owner to migrosdbuser;
+            alter sequence courier_seq owner to migrosdbuser;
+        </sql>
+
+    </changeSet>
+    <changeSet runInTransaction="false" author="mert.unsal" id="2023-01-27 23:54">
+        <sql dbms="postgresql">
+            CREATE INDEX CONCURRENTLY IF NOT EXISTS courier_id_index ON courier(id);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

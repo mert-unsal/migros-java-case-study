@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.Date;
@@ -38,21 +40,21 @@ public class CourierService {
                 CourierEntity courier = CourierEntity
                         .builder()
                         .name(courierEvent.getName())
-                        .eventTime(new Date(courierEvent.getTime()))
+                        .eventTime(courierEvent.getTime())
                         .latitude(courierEvent.getLatitude())
                         .longitude(courierEvent.getLongitude())
                         .build();
 
-                courierRepository.findByName(key).ifPresentOrElse(courierEntity -> {
-                    Instant instant = new Date(courierEvent.getTime()).toInstant();
-                    Instant courierEventTimeSubtracted = instant.minus(1, ChronoUnit.MINUTES);
-                    if(courierEventTimeSubtracted.isAfter(courierEntity.getEventTime().toInstant())) {
+                courierRepository.findFirstByNameOrderByEventTimeDesc(courierEvent.getName()).ifPresentOrElse(courierEntity -> {
+                    ZonedDateTime courierEventTimeSubtracted = new Date(courierEvent.getTime()).toInstant().atZone(ZoneId.of("UTC")).minus(1, ChronoUnit.MINUTES).minus(1,ChronoUnit.MILLIS);
+                    ZonedDateTime courierEntityEventTimeUTC = new Date(courierEntity.getEventTime()).toInstant().atZone(ZoneId.of("UTC"));
+                    if(courierEventTimeSubtracted.isAfter(courierEntityEventTimeUTC)) {
                         log.info("Courier with name : {} has entered the migros store zone : {}",courier.getName(),key);
                         courierRepository.save(courier);
                     }
                 },()-> {
                     log.info("Courier with name : {} has entered the migros store zone : {}",courier.getName(),key);
-                    courierRepository.saveAndFlush(courier);
+                    courierRepository.save(courier);
                 });
             });
         }
@@ -70,7 +72,6 @@ public class CourierService {
                                 store.getLng().doubleValue())))
                 .entrySet()
                 .stream()
-                .sorted(Comparator.comparing(Map.Entry::getValue))
                 .filter(stringDoubleEntry -> stringDoubleEntry.getValue() < 100)
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
