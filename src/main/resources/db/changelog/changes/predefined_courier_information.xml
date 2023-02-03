@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet author="mert.unsal" id="2023-01-30 22:54">
+        <sql>
+            INSERT INTO courier (id, created_date, last_modified_date, name) VALUES (1, '2023-02-03 04:06:16.000000', '2023-02-03 04:06:18.000000', 'CourierA');
+            INSERT INTO courier (id, created_date, last_modified_date, name) VALUES (2, '2023-02-03 04:06:16.000000', '2023-02-03 04:06:18.000000', 'CourierB');
+            INSERT INTO courier (id, created_date, last_modified_date, name) VALUES (3, '2023-02-03 04:06:16.000000', '2023-02-03 04:06:18.000000', 'CourierC');
+        </sql>
+    </changeSet>
+</databaseChangeLog>

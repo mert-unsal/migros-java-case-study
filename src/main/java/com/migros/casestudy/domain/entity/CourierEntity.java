@@ -12,7 +12,6 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.Date;
 
 @Entity
 @Getter
@@ -30,21 +29,4 @@ public class CourierEntity extends AuditingEntity {
     @NotBlank(message = "Name cannot be empty")
     @Column(name = "name", unique = true)
     private String name;
-
-    @NotNull
-    @DecimalMin(value = "-90.00", message = "latitude should not be less than -90.00")
-    @DecimalMax(value = "90.00", message = "latitude should not be less than 90.00")
-    @Column(name = "latitude")
-    private BigDecimal latitude;
-
-    @NotNull
-    @DecimalMin(value = "-180.00", message = "Longitude should not be less than -180.00")
-    @DecimalMax(value = "180.00", message = "Longitude should not be less than 180.00")
-    @Column(name= "longitude")
-    private BigDecimal longitude;
-
-    @NotNull
-    @Column(name= "eventTime")
-    private Long eventTime;
-
 }

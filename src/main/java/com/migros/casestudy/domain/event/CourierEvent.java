@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Builder
 @ToString
 public class CourierEvent {
-    private String name;
+    private Long courierId;
     private Long time;
     private BigDecimal latitude;
     private BigDecimal longitude;

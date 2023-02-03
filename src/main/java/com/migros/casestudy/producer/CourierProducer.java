@@ -1,6 +1,8 @@
 package com.migros.casestudy.producer;
 
+import com.migros.casestudy.domain.event.CourierEvent;
 import com.migros.casestudy.factory.Factory;
+import com.migros.casestudy.service.CourierService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +17,6 @@ public class CourierProducer {
 
     private final KafkaTemplate kafkaTemplate;
     private final Factory factory;
-
     @Value("#{topics['case-study-consumer'].name}")
     private String topic;
 

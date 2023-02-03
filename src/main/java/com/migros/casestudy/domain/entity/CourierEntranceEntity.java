@@ -19,11 +19,11 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-@Table(name = "courier_sum")
-@SequenceGenerator(name = "courier_sum_seq_gen", allocationSize = 1, sequenceName = "courier_sum_seq")
-public class CourierSumDistanceEntity extends AuditingEntity {
+@Table(name = "courier_entrance")
+@SequenceGenerator(name = "courier_entrance_seq_gen", allocationSize = 1, sequenceName = "courier_entrance_seq")
+public class CourierEntranceEntity extends AuditingEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "courier_sum_seq_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "courier_seq_gen")
     private Long id;
 
     @JoinColumn(name = "courier_id")
@@ -33,16 +33,17 @@ public class CourierSumDistanceEntity extends AuditingEntity {
     @NotNull
     @DecimalMin(value = "-90.00", message = "latitude should not be less than -90.00")
     @DecimalMax(value = "90.00", message = "latitude should not be less than 90.00")
-    @Column(name = "last_latitude")
-    private BigDecimal lastLatitude;
+    @Column(name = "latitude")
+    private BigDecimal latitude;
 
     @NotNull
     @DecimalMin(value = "-180.00", message = "Longitude should not be less than -180.00")
     @DecimalMax(value = "180.00", message = "Longitude should not be less than 180.00")
-    @Column(name= "last_longitude")
-    private BigDecimal lastLongitude;
+    @Column(name= "longitude")
+    private BigDecimal longitude;
 
-    @Column(name = "sum_distance")
-    private BigDecimal sumDistance;
+    @NotNull
+    @Column(name= "eventTime")
+    private Long eventTime;
 
 }
