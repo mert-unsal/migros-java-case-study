@@ -15,15 +15,32 @@
                 longitude          double precision     not null,
                 name               varchar(255)
             );
+
+
+            create table if not exists courier_sum
+            (
+                id                   bigint               not null primary key,
+                created_date         timestamp            not null,
+                last_modified_date   timestamp            not null,
+                sum_distance         double precision     not null,
+                last_latitude        double precision     not null,
+                last_longitude       double precision     not null,
+                name                 varchar(255)
+                );
+
             create sequence if not exists courier_seq;
+            create sequence if not exists courier_sum_seq;
             alter table courier owner to migrosdbuser;
+            alter table courier_sum owner to migrosdbuser;
             alter sequence courier_seq owner to migrosdbuser;
+            alter sequence courier_sum_seq owner to migrosdbuser;
         </sql>
 
     </changeSet>
     <changeSet runInTransaction="false" author="mert.unsal" id="2023-01-27 23:54">
         <sql dbms="postgresql">
             CREATE INDEX CONCURRENTLY IF NOT EXISTS courier_id_index ON courier(id);
+            CREATE INDEX CONCURRENTLY IF NOT EXISTS courier_sum_name_index ON courier_sum(name);
         </sql>
     </changeSet>
 </databaseChangeLog>

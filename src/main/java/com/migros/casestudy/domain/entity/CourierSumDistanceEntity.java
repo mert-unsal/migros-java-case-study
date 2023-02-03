@@ -12,7 +12,6 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.Date;
 
 @Entity
 @Getter
@@ -20,31 +19,29 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-@Table(name = "courier")
-@SequenceGenerator(name = "courier_seq_gen", allocationSize = 1, sequenceName = "courier_seq")
-public class CourierEntity extends AuditingEntity {
+@Table(name = "courier_sum")
+@SequenceGenerator(name = "courier_sum_seq_gen", allocationSize = 1, sequenceName = "courier_sum_seq")
+public class CourierSumDistanceEntity extends AuditingEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "courier_seq_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "courier_sum_seq_gen")
     private Long id;
 
-    @NotBlank(message = "Name cannot be empty")
-    @Column(name = "name", unique = true)
-    private String name;
+    @Column(name = "name",unique = true)
+    private String courierName;
 
     @NotNull
     @DecimalMin(value = "-90.00", message = "latitude should not be less than -90.00")
     @DecimalMax(value = "90.00", message = "latitude should not be less than 90.00")
-    @Column(name = "latitude")
-    private BigDecimal latitude;
+    @Column(name = "last_latitude")
+    private BigDecimal lastLatitude;
 
     @NotNull
     @DecimalMin(value = "-180.00", message = "Longitude should not be less than -180.00")
     @DecimalMax(value = "180.00", message = "Longitude should not be less than 180.00")
-    @Column(name= "longitude")
-    private BigDecimal longitude;
+    @Column(name= "last_longitude")
+    private BigDecimal lastLongitude;
 
-    @NotNull
-    @Column(name= "eventTime")
-    private Long eventTime;
+    @Column(name = "sum_distance")
+    private BigDecimal sumDistance;
 
 }

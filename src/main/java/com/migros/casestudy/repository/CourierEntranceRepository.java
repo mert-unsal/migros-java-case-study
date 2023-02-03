@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface CourierRepository extends JpaRepository<CourierEntity, Long> {
+public interface CourierEntranceRepository extends JpaRepository<CourierEntity, Long> {
     Optional<CourierEntity> findFirstByNameOrderByEventTimeDesc(String courierName);
 }
