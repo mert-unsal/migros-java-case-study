@@ -23,7 +23,7 @@ import java.math.BigDecimal;
 @SequenceGenerator(name = "courier_entrance_seq_gen", allocationSize = 1, sequenceName = "courier_entrance_seq")
 public class CourierEntranceEntity extends AuditingEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "courier_seq_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "courier_entrance_seq_gen")
     private Long id;
 
     @JoinColumn(name = "courier_id")

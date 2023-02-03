@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -22,7 +23,7 @@ public class StoreService {
     }
 
     @PostConstruct
-    public void initializeStoreList() {
+    public void initializeStoreList() throws IOException {
         storeList = factory.readResource();
     }
 

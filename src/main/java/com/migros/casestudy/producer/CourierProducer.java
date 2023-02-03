@@ -10,6 +10,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
 
 @Component
 @Slf4j
@@ -26,7 +27,7 @@ public class CourierProducer {
     }
 
     @PostConstruct
-    public void sendCourierEvents() {
+    public void sendCourierEvents() throws IOException {
         factory.readResource().forEach(courierEvent -> {
             kafkaTemplate.send(topic,courierEvent);
             log.info("Event is produced to topic : {} CourierEvent : {}", topic,courierEvent);
