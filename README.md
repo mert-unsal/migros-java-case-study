@@ -42,3 +42,7 @@ For this case, It saves and logs only
 
 for the same Courier
 
+
+### SWAGGER
+There is swagger page for this application.
+You can achieve it here [swagger](http://localhost:8080/swagger-ui/index.html)
