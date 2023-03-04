@@ -18,7 +18,6 @@ public class ListenerConfiguration {
 
     private final PropertiesConfiguration kafkaPropertiesConfiguration;
 
-    @Bean("consumerFactory")
     public ConsumerFactory<String, CourierEvent> consumerFactory() {
         JsonDeserializer<CourierEvent> deserializer = new JsonDeserializer<>(CourierEvent.class, false);
         deserializer.setRemoveTypeHeaders(false);

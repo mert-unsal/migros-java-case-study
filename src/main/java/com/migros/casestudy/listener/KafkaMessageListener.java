@@ -13,9 +13,12 @@ import org.springframework.stereotype.Component;
 public class KafkaMessageListener {
     private final CourierService courierService;
 
-    @KafkaListener(id = "courierConsumer1", groupId = "${kafka-config.case-study-consumer.props.[group.id]}",containerFactory = "kafkaListenerContainerFactory", topics = "#{topics['case-study-consumer'].name}")
+    @KafkaListener(id = "courierConsumer1",
+            topics = "#{topics['case-study-consumer'].name}",
+            groupId = "${kafka-config.case-study-consumer.props.[group.id]}",
+            containerFactory = "kafkaListenerContainerFactory")
     public void consumeMessage(CourierEvent courierEvent) {
-        try{
+        try {
             log.info("Event is received by KafkaMessageListener : CourierEvent -> {}", courierEvent);
             courierService.processEvent(courierEvent);
         } catch (Exception e) {
