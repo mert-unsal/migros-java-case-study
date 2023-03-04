@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: MigrosCaseStudy
+    description: Case Study for Migros Interview
+  profiles:
+    include: postgresql, kafka
+springdoc:
+  api-docs:
+    path: /api-docs
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.hibernate: INFO
+    org.liquibase: INFO
