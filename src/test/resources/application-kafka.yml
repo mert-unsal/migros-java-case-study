@@ -42,4 +42,4 @@ kafka-configuration:
         "[default.api.timeout.ms]": 20000
         "[request.timeout.ms]": 20000
   topics:
-    commission-invoice-create-topic: migros.case.study.courier.topic
+    example-topic: migros.case.study.courier.topic

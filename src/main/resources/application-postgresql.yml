@@ -18,7 +18,7 @@ spring:
       hibernate:
         jdbc:
           time_zone: UTC
-        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
         package_to_scan: com.migros.javacasestudy
   data:
     jpa:

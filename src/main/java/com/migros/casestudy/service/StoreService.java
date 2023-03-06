@@ -2,11 +2,11 @@ package com.migros.casestudy.service;
 
 import com.migros.casestudy.domain.model.Store;
 import com.migros.casestudy.factory.Factory;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.List;
 

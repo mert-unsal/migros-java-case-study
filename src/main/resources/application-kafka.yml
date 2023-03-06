@@ -2,7 +2,7 @@ kafka-configuration:
   producers:
     "[default]":
       props:
-        "[bootstrap.servers]": ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+        "[bootstrap.servers]": localhost:9092,localhost:9093
         "[batch.size]": 16384
         "[buffer.memory]": 33554432
         "[key.serializer]": org.apache.kafka.common.serialization.StringSerializer
@@ -12,25 +12,27 @@ kafka-configuration:
         "[default.api.timeout.ms]": 20000
         "[request.timeout.ms]": 20000
         "[auto.offset.reset]": earliest
-
   consumers:
     "[case-study-consumer]":
       topic: migros.case.study.courier.topic
-      retry-topic: migros.case.study.courier.topic.retry
       error-topic: migros.case.study.courier.topic.error
+      error-producer-bean-name: default
       data-class: com.migros.casestudy.domain.event.CourierEvent
       concurrency: 1
-      retry-count: 1
       sync-commit: true
       sync-commit-timeout-second: 5
-      backoffIntervalMillis: 1000 #wait time for retry
-      multiplier: 2
-      missingTopicAlertEnable: false
-      isExponentialRetry: true
+      retry-type: no_retry
+      non-blocking-retry:
+        include-topics: migros.case.study.courier.topic
+        max-attempts: 1
+        is-exponential-retry: true
+        multiplier: 2
+        backoff-interval-millis: 1000
+        retry-on-exception: com.migros.casestudy.exception.BaseException
       props:
         "[group.id]": migros.case.study.courier.group
         "[retry-group.id]": migros.case.study.courier.retry.group
-        "[bootstrap.servers]": ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+        "[bootstrap.servers]": localhost:9092,localhost:9093
         "[max.poll.records]": 500 #for batch listener
         "[max.poll.interval.ms]": 300000 #poll time
         "[session.timeout.ms]": 10000
@@ -42,4 +44,4 @@ kafka-configuration:
         "[default.api.timeout.ms]": 20000
         "[request.timeout.ms]": 20000
   topics:
-    commission-invoice-create-topic: migros.case.study.courier.topic
+    case-study-consumer-topic: migros.case.study.courier.topic
